@@ -10,19 +10,45 @@ const ISLANDS = [
 ];
 
 function CameraController({ targetIndex, controlsRef }: { targetIndex: number; controlsRef: React.RefObject<any> }) {
-  const targetVec = useRef(new THREE.Vector3(...ISLANDS[0].target));
+  const prevIndex = useRef(targetIndex);
+  const animating = useRef(false);
+  const offsetSnapshot = useRef(new THREE.Vector3());
 
   useFrame(() => {
+    if (prevIndex.current !== targetIndex) {
+      prevIndex.current = targetIndex;
+      animating.current = true;
+      const controls = controlsRef.current;
+      if (controls) {
+        offsetSnapshot.current.copy(controls.object.position).sub(controls.target);
+      }
+    }
+
+    if (!animating.current) return;
+
     const controls = controlsRef.current;
     if (!controls) return;
 
     const desired = ISLANDS[targetIndex].target;
-    targetVec.current.set(desired[0], desired[1], desired[2]);
+    const tx = desired[0], ty = desired[1], tz = desired[2];
 
-    controls.target.lerp(targetVec.current, 0.05);
-    controls.object.position.x += (desired[0] + 15 - controls.object.position.x) * 0.05;
-    controls.object.position.z += (desired[2] + 15 - controls.object.position.z) * 0.05;
+    controls.target.x += (tx - controls.target.x) * 0.08;
+    controls.target.y += (ty - controls.target.y) * 0.08;
+    controls.target.z += (tz - controls.target.z) * 0.08;
+
+    const goalPos = new THREE.Vector3(tx, ty, tz).add(offsetSnapshot.current);
+    controls.object.position.x += (goalPos.x - controls.object.position.x) * 0.08;
+    controls.object.position.y += (goalPos.y - controls.object.position.y) * 0.08;
+    controls.object.position.z += (goalPos.z - controls.object.position.z) * 0.08;
+
     controls.update();
+
+    const dist = Math.abs(controls.target.x - tx) + Math.abs(controls.target.y - ty) + Math.abs(controls.target.z - tz);
+    if (dist < 0.01) {
+      controls.target.set(tx, ty, tz);
+      controls.update();
+      animating.current = false;
+    }
   });
 
   return null;
