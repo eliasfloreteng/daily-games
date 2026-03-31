@@ -29,7 +29,7 @@ const GEO_LINKS = [
   "https://timeguessr.com/",
   "https://www.geoguessr.com/",
   "https://globle-game.com/",
-  "https://flagle-game.com/daily",
+  "https://www.flagle.io/",
   "https://worldle.teuteuf.fr/"
 ];
 
