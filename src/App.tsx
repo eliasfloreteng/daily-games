@@ -36,8 +36,8 @@ export default function App() {
   const goPrev = useCallback(() => setIslandIndex(i => (i - 1 + ISLANDS.length) % ISLANDS.length), []);
 
   return (
-    <div className="w-full h-screen bg-[#e2e8f0] relative overflow-hidden">
-      <Canvas shadows>
+    <div className="w-full h-screen bg-[#e2e8f0] relative overflow-hidden select-none" onDragStart={e => e.preventDefault()}>
+      <Canvas shadows style={{ touchAction: 'none' }}>
         <Suspense fallback={null}>
           <OrthographicCamera makeDefault position={[15, 15, 15]} zoom={85} near={-100} far={100} />
           <ambientLight intensity={0.6} />
