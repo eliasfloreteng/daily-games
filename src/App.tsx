@@ -3,11 +3,12 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrthographicCamera, Environment, ContactShadows, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import Scene from './components/Scene';
+import { categories } from './data/links';
 
-const ISLANDS = [
-  { name: 'Music', target: [0, -1, 0] as [number, number, number] },
-  { name: 'Geography', target: [9, -1, -7] as [number, number, number] },
-];
+const ISLANDS = categories.map((cat) => ({
+  name: cat.name,
+  target: (cat.offset ? [cat.offset[0], -1, cat.offset[2]] : [0, -1, 0]) as [number, number, number],
+}));
 
 function CameraController({ targetIndex, controlsRef }: { targetIndex: number; controlsRef: React.RefObject<any> }) {
   const prevIndex = useRef(targetIndex);

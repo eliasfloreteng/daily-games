@@ -1,20 +1,45 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Daily Games
 
-# Run and deploy your AI Studio app
+A 3D isometric portal for your favorite daily web games. Navigate between floating islands, each themed around a category, and click interactive cubes to launch a game.
 
-This contains everything you need to run your app locally.
+Built with React, Three.js, and Vite.
 
-View your app in AI Studio: https://ai.studio/apps/26950338-0e58-4e25-a2e5-990cf8cd0404
+## Games
 
-## Run Locally
+### Music
 
-**Prerequisites:**  Node.js
+| Game | Link |
+|------|------|
+| Spotle | https://spotle.io/ |
+| Harmonies | https://harmonies.io/ |
+| Crosstune | https://crosstune.io/ |
+| Songless | https://lessgames.com/songless |
+| Bandle | https://bandle.app/daily |
+| Relatle | https://relatle.io/ |
+| Popidle | https://popidle.the-sound.co.uk |
 
+### Geography
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+| Game | Link |
+|------|------|
+| TimeGuessr | https://timeguessr.com/ |
+| GeoGuessr | https://www.geoguessr.com/ |
+| Globle | https://globle-game.com/ |
+| Flagle | https://www.flagle.io/ |
+| Worldle | https://worldle.teuteuf.fr/ |
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+Open http://localhost:3000 to view the app. Use the arrow buttons to navigate between islands and click any cube to open its game.
+
+## Tech Stack
+
+- **React 19** + **TypeScript** — UI
+- **Three.js** via `@react-three/fiber` and `@react-three/drei` — 3D rendering
+- **Tailwind CSS** — Styling
+- **Vite** — Build tool
