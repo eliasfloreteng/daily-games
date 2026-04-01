@@ -67,21 +67,33 @@ export default function App() {
       <Canvas shadows style={{ touchAction: 'none' }}>
         <Suspense fallback={null}>
           <OrthographicCamera makeDefault position={[15, 15, 15]} zoom={85} near={-100} far={100} />
-          <ambientLight intensity={0.6} />
+          <ambientLight intensity={0.4} color="#f5ead6" />
+          {/* Sun light - warm directional with soft shadows */}
           <directionalLight
             castShadow
-            position={[10, 20, 5]}
-            intensity={1.2}
-            shadow-mapSize={[2048, 2048]}
-            shadow-camera-left={-15}
-            shadow-camera-right={15}
-            shadow-camera-top={15}
-            shadow-camera-bottom={-15}
+            position={[12, 18, 8]}
+            intensity={1.8}
+            color="#fff5e0"
+            shadow-mapSize={[4096, 4096]}
+            shadow-camera-left={-20}
+            shadow-camera-right={20}
+            shadow-camera-top={20}
+            shadow-camera-bottom={-20}
+            shadow-camera-near={0.1}
+            shadow-camera-far={50}
+            shadow-bias={-0.0005}
+            shadow-radius={4}
+          />
+          {/* Subtle fill light from opposite side */}
+          <directionalLight
+            position={[-8, 10, -6]}
+            intensity={0.3}
+            color="#d4e5ff"
           />
           <Environment preset="city" />
           <group position={[0, -1, 0]}>
             <Scene />
-            <ContactShadows position={[0, -0.49, 0]} opacity={0.4} scale={30} blur={2.5} far={4} color="#000000" />
+            <ContactShadows position={[0, -0.49, 0]} opacity={0.35} scale={40} blur={3} far={5} color="#2a1f0f" />
           </group>
           <OrbitControls
             ref={controlsRef}
