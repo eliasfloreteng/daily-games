@@ -1,5 +1,3 @@
-import { Mesh } from 'three';
-
 interface Props {
   position: [number, number, number];
   height: number;
