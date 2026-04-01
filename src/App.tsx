@@ -63,17 +63,17 @@ export default function App() {
   const goPrev = useCallback(() => setIslandIndex(i => (i - 1 + ISLANDS.length) % ISLANDS.length), []);
 
   return (
-    <div className="w-full h-screen bg-[#e2e8f0] relative overflow-hidden select-none" onDragStart={e => e.preventDefault()}>
+    <div className="w-full h-screen bg-[#f0eeeb] relative overflow-hidden select-none" onDragStart={e => e.preventDefault()}>
       <Canvas shadows style={{ touchAction: 'none' }}>
         <Suspense fallback={null}>
           <OrthographicCamera makeDefault position={[15, 15, 15]} zoom={85} near={-100} far={100} />
-          <ambientLight intensity={0.3} color="#f5ead6" />
-          {/* Sun light - warm directional with prominent soft shadows */}
+          <ambientLight intensity={0.6} color="#ffffff" />
+          {/* Sun light — soft warm shadows */}
           <directionalLight
             castShadow
-            position={[10, 16, 6]}
-            intensity={2.2}
-            color="#fff5e0"
+            position={[10, 18, 8]}
+            intensity={1.5}
+            color="#fffaf0"
             shadow-mapSize={[4096, 4096]}
             shadow-camera-left={-20}
             shadow-camera-right={20}
@@ -81,18 +81,18 @@ export default function App() {
             shadow-camera-bottom={-20}
             shadow-camera-near={0.1}
             shadow-camera-far={50}
-            shadow-bias={-0.0005}
-            shadow-radius={3}
+            shadow-bias={-0.0004}
+            shadow-radius={5}
           />
-          {/* Subtle fill light from opposite side */}
+          {/* Fill light to soften shadow side */}
           <directionalLight
-            position={[-8, 10, -6]}
-            intensity={0.15}
-            color="#d4e5ff"
+            position={[-6, 12, -4]}
+            intensity={0.25}
+            color="#f0f0ff"
           />
           <group position={[0, -1, 0]}>
             <Scene />
-            <ContactShadows position={[0, -0.49, 0]} opacity={0.55} scale={40} blur={2} far={6} color="#1a150a" />
+            <ContactShadows position={[0, -0.49, 0]} opacity={0.4} scale={40} blur={2.5} far={5} color="#8a8078" />
           </group>
           <OrbitControls
             ref={controlsRef}
