@@ -53,4 +53,15 @@ export const categories: GameCategory[] = [
       { name: "Worldle", url: "https://worldle.teuteuf.fr/" },
     ],
   },
+  {
+    name: "Movies",
+    gridSize: 7,
+    offset: [-9, 0, -7],
+    cubePositions: [
+      [0, 0],
+    ],
+    games: [
+      { name: "Spotle Movie", url: "https://spotle.movie/" },
+    ],
+  },
 ];
