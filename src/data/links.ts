@@ -36,7 +36,7 @@ export const categories: GameCategory[] = [
   },
   {
     name: "Geography",
-    gridSize: 7,
+    gridSize: 9,
     offset: [9, 0, -7],
     cubePositions: [
       [0, 0],
@@ -44,6 +44,7 @@ export const categories: GameCategory[] = [
       [-1, 1],
       [1, 1],
       [-1, -1],
+      [2, 0],
     ],
     games: [
       { name: "TimeGuessr", url: "https://timeguessr.com/" },
@@ -51,6 +52,22 @@ export const categories: GameCategory[] = [
       { name: "Globle", url: "https://globle-game.com/" },
       { name: "Flagle", url: "https://www.flagle.io/" },
       { name: "Worldle", url: "https://worldle.teuteuf.fr/" },
+      { name: "Flagle Daily", url: "https://flagle-game.com/daily" },
+    ],
+  },
+  {
+    name: "Movies",
+    gridSize: 7,
+    offset: [-9, 0, -7],
+    cubePositions: [
+      [0, 0],
+      [1, 1],
+      [-1, -1],
+    ],
+    games: [
+      { name: "Spotle Movie", url: "https://spotle.movie/" },
+      { name: "Framed", url: "https://framed.wtf/" },
+      { name: "Flickle", url: "https://flickle.app/" },
     ],
   },
 ];
