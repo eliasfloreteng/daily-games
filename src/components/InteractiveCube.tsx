@@ -10,6 +10,23 @@ interface Props {
 
 const PARTICLE_COUNT = 27;
 
+const iconModules = import.meta.glob('../assets/icons/*', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>;
+
+const iconMap: Record<string, string> = Object.fromEntries(
+  Object.entries(iconModules).map(([path, url]) => {
+    const filename = path.split('/').pop() ?? '';
+    const hostname = filename.replace(/\.[^.]+$/, '');
+    return [hostname, url];
+  })
+);
+
+const FALLBACK_ICON =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+
 export default function InteractiveCube({ position, link }: Props) {
   const groupRef = useRef<Group>(null);
   const meshRef = useRef<Mesh>(null);
@@ -27,7 +44,7 @@ export default function InteractiveCube({ position, link }: Props) {
     }
   }, [link]);
   
-  const textureUrl = `https://icon.horse/icon/${hostname}`;
+  const textureUrl = iconMap[hostname] ?? FALLBACK_ICON;
   const texture = useTexture(textureUrl);
 
   const dummy = useMemo(() => new Object3D(), []);
