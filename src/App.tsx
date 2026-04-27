@@ -1,6 +1,6 @@
 import { Suspense, useState, useRef, useCallback } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrthographicCamera, Environment, ContactShadows, OrbitControls } from '@react-three/drei';
+import { OrthographicCamera, ContactShadows, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import Scene from './components/Scene';
 import { categories } from './data/links';
@@ -63,25 +63,36 @@ export default function App() {
   const goPrev = useCallback(() => setIslandIndex(i => (i - 1 + ISLANDS.length) % ISLANDS.length), []);
 
   return (
-    <div className="w-full h-screen bg-[#e2e8f0] relative overflow-hidden select-none" onDragStart={e => e.preventDefault()}>
+    <div className="w-full h-screen bg-[#f0eeeb] relative overflow-hidden select-none" onDragStart={e => e.preventDefault()}>
       <Canvas shadows style={{ touchAction: 'none' }}>
         <Suspense fallback={null}>
           <OrthographicCamera makeDefault position={[15, 15, 15]} zoom={85} near={-100} far={100} />
-          <ambientLight intensity={0.6} />
+          <ambientLight intensity={0.6} color="#ffffff" />
+          {/* Sun light — soft warm shadows */}
           <directionalLight
             castShadow
-            position={[10, 20, 5]}
-            intensity={1.2}
-            shadow-mapSize={[2048, 2048]}
-            shadow-camera-left={-15}
-            shadow-camera-right={15}
-            shadow-camera-top={15}
-            shadow-camera-bottom={-15}
+            position={[10, 18, 8]}
+            intensity={1.5}
+            color="#fffaf0"
+            shadow-mapSize={[4096, 4096]}
+            shadow-camera-left={-20}
+            shadow-camera-right={20}
+            shadow-camera-top={20}
+            shadow-camera-bottom={-20}
+            shadow-camera-near={0.1}
+            shadow-camera-far={50}
+            shadow-bias={-0.0004}
+            shadow-radius={5}
           />
-          <Environment preset="city" />
+          {/* Fill light to soften shadow side */}
+          <directionalLight
+            position={[-6, 12, -4]}
+            intensity={0.25}
+            color="#f0f0ff"
+          />
           <group position={[0, -1, 0]}>
             <Scene />
-            <ContactShadows position={[0, -0.49, 0]} opacity={0.4} scale={30} blur={2.5} far={4} color="#000000" />
+            <ContactShadows position={[0, -0.49, 0]} opacity={0.4} scale={40} blur={2.5} far={5} color="#8a8078" />
           </group>
           <OrbitControls
             ref={controlsRef}
